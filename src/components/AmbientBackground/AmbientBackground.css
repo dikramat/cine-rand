@@ -1,0 +1,38 @@
+﻿.ambient-background {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ambient-background__glow {
+  position: absolute;
+  top: 8vh;
+  width: 39vw;
+  height: 78vh;
+  filter: blur(64px);
+  opacity: .92;
+}
+
+.ambient-background__glow--left {
+  left: -15vw;
+  background: radial-gradient(ellipse, #ff966f 0%, #bc4a8c 36%, rgba(81, 32, 103, .54) 60%, transparent 76%);
+}
+
+.ambient-background__glow--right {
+  right: -15vw;
+  background: radial-gradient(ellipse, #369ff1 0%, #385ed2 35%, rgba(49, 43, 135, .55) 62%, transparent 78%);
+}
+
+@media (max-width: 600px) {
+  .ambient-background__glow {
+    top: 14vh;
+    width: 75vw;
+    height: 64vh;
+    filter: blur(52px);
+  }
+
+  .ambient-background__glow--left { left: -45vw; }
+  .ambient-background__glow--right { right: -49vw; }
+}

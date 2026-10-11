@@ -1,0 +1,14 @@
+﻿.app-shell {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-height: 100svh;
+  overflow: hidden;
+  place-items: center;
+  padding: 48px 24px;
+  background:
+    radial-gradient(ellipse 54% 56% at 50% 44%, rgba(23, 20, 57, .6), transparent 100%),
+    linear-gradient(112deg, #121027 0%, #0d0d27 48%, #101333 100%);
+}
+.app-content { display: flex; width: min(100%, 680px); align-items: center; flex-direction: column; text-align: center; }
+@media (max-width: 600px) { .app-shell { padding: 36px 22px 58px; } }

@@ -1,0 +1,53 @@
+﻿.movie-result {
+  display: flex;
+  width: min(100%, 620px);
+  max-height: min(70vh, 680px);
+  padding: 14px;
+  gap: 22px;
+  border: 1px solid #ffffff2c;
+  border-radius: 18px;
+  background: #111127aa;
+  text-align: left;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 70px #05051466;
+  animation: movie-result-rise .35s ease both;
+}
+.movie-result__poster { width: 184px; min-height: 260px; align-self: flex-start; border-radius: 11px; object-fit: cover; }
+.movie-result__copy { min-width: 0; align-self: center; overflow-y: auto; }
+.movie-result__summary { color: #d8b3e8; font-size: 10px; letter-spacing: 1px; }
+.movie-result__title { margin: 12px 0; font-size: 28px; line-height: 1.15; }
+.movie-result__overview {
+  display: -webkit-box;
+  overflow: hidden;
+  color: #d4d2e0;
+  font-size: 13px;
+  line-height: 1.6;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+}
+.movie-result__controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; }
+.movie-result__controls button {
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid #a69abf88;
+  border-radius: 10px;
+  background: rgba(255,255,255,.04);
+  color: #f4efff;
+  font-size: 12px;
+  cursor: pointer;
+  transition: filter .18s, transform .18s;
+}
+.movie-result__controls button:hover { filter: brightness(1.2); transform: translateY(-1px); }
+.movie-result__controls button:disabled { opacity: .65; cursor: wait; transform: none; }
+.movie-result__controls .movie-result__reroll { border-color: transparent; background: linear-gradient(105deg, #ff986d 0%, #ed48c4 51%, #438ff5 100%); }
+.movie-result__controls .movie-result__back { border-color: transparent; background: transparent; color: #d1cce0; }
+@keyframes movie-result-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 600px) {
+  .movie-result { max-height: min(72vh, 760px); gap: 14px; padding: 10px; }
+  .movie-result__poster { width: 38%; min-height: 0; aspect-ratio: 2 / 3; }
+  .movie-result__title { font-size: 21px; }
+  .movie-result__summary { font-size: 8px; line-height: 1.5; }
+  .movie-result__overview { font-size: 11px; -webkit-line-clamp: 4; }
+  .movie-result__controls { align-items: stretch; flex-direction: column; }
+  .movie-result__controls button { width: 100%; }
+}

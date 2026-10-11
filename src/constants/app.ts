@@ -1,0 +1,17 @@
+﻿export const APP_DEFAULTS = {
+  emptyGenreId: '',
+  emptyActorQuery: '',
+  emptyFirstLetter: '',
+  emptyImagePath: '',
+  movieIndexMinimum: 0,
+  minimumActorQueryLength: 2,
+  actorSearchDebounceMs: 350,
+  discoverPagesToScan: 8,
+  pageOffset: 1,
+  firstLetterOptions: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+  actorSearchResultLimit: 6,
+  missingYear: 'N/A',
+  siteNameStart: 'Cine',
+  siteNameEnd: 'Random',
+  clapperboardIcon: '🎬',
+} as const

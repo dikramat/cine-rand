@@ -7,7 +7,15 @@ import type { Person } from './person'
 export type MovieActionsProps = {
   loading: boolean
   onRandomMovie: () => void
+  onTopRatedMovie: () => void
   onOpenFilters: () => void
+}
+
+export type TrendingMoviesProps = {
+  movies: Movie[]
+  loading: boolean
+  error: boolean
+  onSelectMovie: (movie: Movie) => void
 }
 
 export type GenreFilterProps = {
@@ -17,6 +25,8 @@ export type GenreFilterProps = {
   actorQuery: string
   actorResults: Person[]
   selectedFirstLetter: string
+  fromYear: string
+  toYear: string
   actorSearchLoading: boolean
   actorSearchError: boolean
   loading: boolean
@@ -24,6 +34,8 @@ export type GenreFilterProps = {
   onActorQueryChange: (query: string) => void
   onSelectActor: (actor: Person | null) => void
   onSelectFirstLetter: (letter: string) => void
+  onFromYearChange: (year: string) => void
+  onToYearChange: (year: string) => void
   onSubmit: () => void
   onClose: () => void
 }

@@ -3,7 +3,7 @@ import { UI_TEXT } from '../../locales/en'
 import type { GenreFilterProps } from '../../types/componentProps'
 import './GenreFilter.css'
 
-export function GenreFilter({ genres, selectedGenreId, selectedActor, actorQuery, actorResults, selectedFirstLetter, actorSearchLoading, actorSearchError, loading, onSelectGenre, onActorQueryChange, onSelectActor, onSelectFirstLetter, onSubmit, onClose }: GenreFilterProps) {
+export function GenreFilter({ genres, selectedGenreId, selectedActor, actorQuery, actorResults, selectedFirstLetter, fromYear, toYear, actorSearchLoading, actorSearchError, loading, onSelectGenre, onActorQueryChange, onSelectActor, onSelectFirstLetter, onFromYearChange, onToYearChange, onSubmit, onClose }: GenreFilterProps) {
   return (
     <div className="genre-filter">
       <div className="genre-filter__field">
@@ -15,6 +15,19 @@ export function GenreFilter({ genres, selectedGenreId, selectedActor, actorQuery
           </select>
         </div>
       </div>
+      <fieldset className="genre-filter__year-range">
+        <legend className="genre-filter__label">{UI_TEXT.filters.yearRange}</legend>
+        <div className="genre-filter__year-fields">
+          <div className="genre-filter__field">
+            <label className="genre-filter__year-label" htmlFor="from-year">{UI_TEXT.filters.fromYear}</label>
+            <input className="genre-filter__input" id="from-year" type="number" min={APP_DEFAULTS.minimumValidYear} step={APP_DEFAULTS.yearInputStep} value={fromYear} onChange={(event) => onFromYearChange(event.target.value)} />
+          </div>
+          <div className="genre-filter__field">
+            <label className="genre-filter__year-label" htmlFor="to-year">{UI_TEXT.filters.toYear}</label>
+            <input className="genre-filter__input" id="to-year" type="number" min={APP_DEFAULTS.minimumValidYear} step={APP_DEFAULTS.yearInputStep} value={toYear} onChange={(event) => onToYearChange(event.target.value)} />
+          </div>
+        </div>
+      </fieldset>
       <div className="genre-filter__field">
         <label className="genre-filter__label" htmlFor="first-letter">{UI_TEXT.filters.firstLetter}</label>
         <div className="genre-filter__select-wrap">

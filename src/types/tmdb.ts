@@ -7,6 +7,7 @@ export type GenreListResponse = {
 }
 
 export type MovieDiscoverResponse = {
+  total_results: number
   total_pages: number
   results: Movie[]
 }

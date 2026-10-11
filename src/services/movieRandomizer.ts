@@ -3,9 +3,22 @@ import { APP_DEFAULTS } from '../constants/app'
 import type { Movie } from '../types/movie'
 import type { MovieFilters } from '../types/movieFilters'
 import type { MovieDiscoverParams } from '../types/tmdb'
-import { discoverMovies } from '../tmdb'
+import { discoverMovies, getTopRatedMovies } from '../tmdb'
+
+function isValidYear(value: string) {
+  return !value || (Number.isInteger(Number(value)) && Number(value) >= APP_DEFAULTS.minimumValidYear)
+}
+
+function validateYearRange(filters?: MovieFilters) {
+  if (!filters) return
+  const { fromYear, toYear } = filters
+  const hasValidYears = isValidYear(fromYear) && isValidYear(toYear)
+  const hasValidOrder = !fromYear || !toYear || Number(fromYear) <= Number(toYear)
+  if (!hasValidYears || !hasValidOrder) throw new Error(APP_ERROR_CODES.invalidYearRange)
+}
 
 export async function getRandomMovie(filters?: MovieFilters): Promise<Movie> {
+  validateYearRange(filters)
   const { discoverParams, firstDiscoverPage, maximumDiscoverPage } = TMDB_CONFIG
   const params: MovieDiscoverParams = {
     [discoverParams.adultContent]: discoverParams.adultContentDisabled,
@@ -13,6 +26,8 @@ export async function getRandomMovie(filters?: MovieFilters): Promise<Movie> {
     [discoverParams.sortBy]: discoverParams.sortOrder,
     ...(filters?.genreId ? { [discoverParams.genre]: filters.genreId } : {}),
     ...(filters?.actor ? { [discoverParams.cast]: String(filters.actor.id) } : {}),
+    ...(filters?.fromYear ? { [discoverParams.releaseDateFrom]: `${filters.fromYear}${TMDB_CONFIG.yearDateBoundaries.start}` } : {}),
+    ...(filters?.toYear ? { [discoverParams.releaseDateTo]: `${filters.toYear}${TMDB_CONFIG.yearDateBoundaries.end}` } : {}),
   }
   const firstPage = await discoverMovies(params)
   const availablePages = Math.min(firstPage.total_pages, maximumDiscoverPage)
@@ -34,4 +49,20 @@ export async function getRandomMovie(filters?: MovieFilters): Promise<Movie> {
   if (!movies.length) throw new Error(APP_ERROR_CODES.noMoviesFound)
   const randomIndex = Math.floor(Math.random() * movies.length) + APP_DEFAULTS.movieIndexMinimum
   return movies[randomIndex]
+}
+
+export async function getRandomTopRatedMovie(): Promise<Movie> {
+  const firstPage = await getTopRatedMovies(String(TMDB_CONFIG.firstDiscoverPage))
+  const poolSize = Math.min(firstPage.total_results, APP_DEFAULTS.topRatedPoolSize)
+  if (!poolSize) throw new Error(APP_ERROR_CODES.noMoviesFound)
+
+  const randomRank = Math.floor(Math.random() * poolSize)
+  const page = Math.floor(randomRank / TMDB_CONFIG.moviesPerPage) + TMDB_CONFIG.firstDiscoverPage
+  const pageResults = page === TMDB_CONFIG.firstDiscoverPage
+    ? firstPage
+    : await getTopRatedMovies(String(page))
+  const pageMovies = pageResults.results.filter((movie) => movie.poster_path && movie.overview)
+  if (!pageMovies.length) throw new Error(APP_ERROR_CODES.noMoviesFound)
+  const randomIndex = Math.floor(Math.random() * pageMovies.length) + APP_DEFAULTS.movieIndexMinimum
+  return pageMovies[randomIndex]
 }

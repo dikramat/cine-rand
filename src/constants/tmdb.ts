@@ -6,6 +6,7 @@ export const TMDB_CONFIG = {
   imageSize: 'w500',
   maximumDiscoverPage: 500,
   firstDiscoverPage: 1,
+  moviesPerPage: 20,
   yearCharacterOffset: 0,
   yearCharacterCount: 4,
   ratingDecimalPlaces: 1,
@@ -22,6 +23,8 @@ export const TMDB_CONFIG = {
     genres: '/genre/movie/list',
     discoverMovies: '/discover/movie',
     movieDetails: '/movie',
+    topRatedMovies: '/movie/top_rated',
+    weeklyTrendingMovies: '/trending/movie/week',
     searchPeople: '/search/person',
   },
   discoverParams: {
@@ -34,6 +37,12 @@ export const TMDB_CONFIG = {
     page: 'page',
     genre: 'with_genres',
     cast: 'with_cast',
+    releaseDateFrom: 'primary_release_date.gte',
+    releaseDateTo: 'primary_release_date.lte',
+  },
+  yearDateBoundaries: {
+    start: '-01-01',
+    end: '-12-31',
   },
   personSearchParams: {
     query: 'query',
@@ -45,4 +54,5 @@ export const APP_ERROR_CODES = {
   missingApiKey: 'missingApiKey',
   requestFailed: 'requestFailed',
   noMoviesFound: 'noMoviesFound',
+  invalidYearRange: 'invalidYearRange',
 } as const

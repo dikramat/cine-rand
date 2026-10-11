@@ -4,4 +4,6 @@ export type MovieFilters = {
   genreId: string
   actor: Person | null
   firstLetter: string
+  fromYear: string
+  toYear: string
 }

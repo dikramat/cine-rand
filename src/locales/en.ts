@@ -18,10 +18,20 @@ export const UI_TEXT = {
   buttons: {
     randomMovie: 'Random Movie',
     chooseByFilters: 'Choose by Filters',
+    topRatedMovies: 'Random TMDB Top Rated Movie',
     searchMovie: 'Find a Movie',
     searching: 'Finding a movie...',
     anotherMovie: 'Another Movie',
-    back: 'Back',
+    back: '← Back',
+  },
+  trending: {
+    title: 'Trending this week',
+    loading: 'Loading weekly trends...',
+    unavailable: 'Weekly trends are temporarily unavailable.',
+    noMovies: 'No trending movies are available right now.',
+    posterUnavailable: 'Poster unavailable',
+    previous: 'Previous trending movie',
+    next: 'Next trending movie',
   },
   filters: {
     label: 'CHOOSE FILTERS',
@@ -29,6 +39,9 @@ export const UI_TEXT = {
     anyGenre: 'Any genre',
     firstLetter: 'FIRST LETTER OF TITLE',
     anyLetter: 'Any letter',
+    yearRange: 'RELEASE YEAR RANGE',
+    fromYear: 'From year',
+    toYear: 'To year',
     actor: 'ACTOR',
     actorPlaceholder: 'Search for an actor',
     searchingActors: 'Searching actors...',
@@ -59,6 +72,7 @@ export const UI_TEXT = {
   errors: {
     [APP_ERROR_CODES.missingApiKey]: 'Add VITE_TMDB_API_KEY to .env.local',
     [APP_ERROR_CODES.requestFailed]: 'TMDB is temporarily unavailable. Please try again.',
-    [APP_ERROR_CODES.noMoviesFound]: 'No movies found for these filters. Try changing your selections.',
+    [APP_ERROR_CODES.noMoviesFound]: 'No movies are available. Please try again.',
+    [APP_ERROR_CODES.invalidYearRange]: 'Enter valid whole years and make sure the start year is not after the end year.',
   },
 } as const

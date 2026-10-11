@@ -1,22 +1,23 @@
-﻿# Інструкції для агента
+# Agent Instructions
 
-## Погодження змін
+## Change Approval
 
-- Перед змінами у файлах проєкту опиши, що саме плануєш змінити і які файли це зачепить, та дочекайся явного схвалення користувача.
-- Не роби висновків про бажану поведінку чи структуру лише з попереднього контексту. Якщо вимога неоднозначна, постав запитання до внесення змін.
-- Виконуй лише погоджений обсяг роботи. Якщо під час роботи виникла потреба в додаткових змінах, спершу погодь їх окремо.
+- Before changing project files, describe the planned changes and the files they will affect, then wait for the user's explicit approval.
+- Do not infer desired behavior or structure from prior context alone. If a requirement is ambiguous, ask a question before making changes.
+- Make only the approved changes. If additional changes become necessary, obtain separate approval first.
 
-## Дані та текст інтерфейсу
+## Data and UI Text
 
-- Не вбудовуй у компоненти чи бізнес-логіку хардкоджені дані: числові значення, дати, текстові значення та контент інтерфейсу.
-- Дані фільмів, жанрів, рейтингів та інші предметні дані отримуй із джерела даних проєкту, зокрема з TMDB API, або з погодженої конфігурації.
-- Тексти UI (назви кнопок, заголовки, підказки, повідомлення про помилки та інші видимі рядки) зберігай окремо від компонентів у файлах текстів/локалізації.
-- Значення конфігурації та спільні константи визначай в окремих файлах констант. Не дублюй їх у компонентах або бізнес-логіці.
-- Не підміняй відсутні дані вигаданими прикладами чи значеннями за замовчуванням без погодження. Для відсутніх або помилкових даних показуй визначений стан UI.
+- Do not hardcode data in components or business logic, including numeric values, dates, text values, or UI content.
+- Get movie, genre, rating, and other domain data from the project's data source, such as the TMDB API, or from approved configuration.
+- Keep UI text (button labels, headings, hints, error messages, and other visible strings) separate from components in text or localization files.
+- Define configuration values and shared constants in separate constants files. Do not duplicate them in components or business logic.
+- Do not replace missing data with fabricated examples or default values without approval. Show a defined UI state for missing or invalid data.
 
-## Розділення відповідальностей
+## Separation of Responsibilities
 
-- Тримай бізнес-логіку окремо від UI-компонентів.
-- Тримай UI-компоненти окремо від констант, текстів інтерфейсу, інтерфейсів та типів.
-- Оголошення інтерфейсів і типів зберігай у відповідних окремих файлах; не визначай їх усередині компонентів.
-- Розміщуй нові файли послідовно з наявною структурою проєкту, не об'єднуючи різні відповідальності в одному файлі.
+- Keep business logic separate from UI components.
+- Keep UI components separate from constants, text, interfaces, and types.
+- Store interface and type declarations in their appropriate separate files; do not define them inside components.
+- Place new files consistently with the existing project structure, keeping distinct responsibilities in separate files.
+- Do not create inline functions or ternary expressions directly in the `return` statements of hooks and components. In composite hooks and components, create named data groups and return a prepared variable or its alias instead of a large flat object.

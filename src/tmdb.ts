@@ -1,6 +1,7 @@
 ﻿import { APP_ERROR_CODES, TMDB_CONFIG } from './constants/tmdb'
 import { APP_DEFAULTS } from './constants/app'
 import type { Genre } from './types/genre'
+import type { Movie } from './types/movie'
 import type { MovieDetails } from './types/movieDetails'
 import type { MovieDiscoverParams, GenreListResponse, MovieDiscoverResponse, PersonSearchResponse } from './types/tmdb'
 import type { Person } from './types/person'
@@ -31,6 +32,17 @@ export async function getGenres(): Promise<Genre[]> {
 
 export async function discoverMovies(params: MovieDiscoverParams): Promise<MovieDiscoverResponse> {
   return request<MovieDiscoverResponse>(TMDB_CONFIG.endpoints.discoverMovies, params)
+}
+
+export async function getTopRatedMovies(page: string): Promise<MovieDiscoverResponse> {
+  return request<MovieDiscoverResponse>(TMDB_CONFIG.endpoints.topRatedMovies, {
+    [TMDB_CONFIG.discoverParams.page]: page,
+  })
+}
+
+export async function getWeeklyTrendingMovies(): Promise<Movie[]> {
+  const data = await request<MovieDiscoverResponse>(TMDB_CONFIG.endpoints.weeklyTrendingMovies)
+  return data.results
 }
 
 export async function searchPeople(query: string): Promise<Person[]> {
